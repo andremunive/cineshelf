@@ -1,0 +1,9 @@
+@use "./colors.scss" as colors;
+
+body,
+html {
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  font-family: "Nunito", sans-serif;
+}

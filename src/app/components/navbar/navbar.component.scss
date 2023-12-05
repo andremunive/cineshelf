@@ -1,0 +1,68 @@
+.container {
+  height: 58px;
+  width: 100%;
+  // background: rgba(231, 231, 231, 0.13);
+  // backdrop-filter: blur(5px);
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .logo {
+    width: 200px;
+    margin-left: 130px;
+  }
+  .actions {
+    margin-right: 130px;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    .filter {
+      .select-filter {
+        height: 38px !important;
+        width: 176px !important;
+        ::ng-deep .mat-mdc-text-field-wrapper {
+          background-color: #484848;
+          border-radius: 0;
+          display: flex;
+          align-items: center;
+        }
+        ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+          display: none;
+        }
+        ::ng-deep .mat-mdc-select-value-text {
+          color: white;
+        }
+        ::ng-deep .mat-mdc-select-arrow {
+          color: white;
+        }
+      }
+    }
+    .vertical-line {
+      border-left: 2px solid #232323;
+      height: 50px;
+      margin: 0 14px;
+    }
+    a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 24px;
+      font-weight: 700;
+    }
+  }
+}
+::ng-deep .mat-primary.mdc-menu-surface {
+  box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2);
+  background-color: #484848;
+}
+
+::ng-deep .mdc-list-item__primary-text {
+  color: #bebebe;
+}
+
+::ng-deep
+  .mat-primary
+  .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled)
+  .mdc-list-item__primary-text {
+  color: #fff;
+}
