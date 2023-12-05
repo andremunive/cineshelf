@@ -1,9 +1,13 @@
+@use "../../../assets/build/scss/colors.scss" as colors;
+
 .container {
+  position: absolute;
+  z-index: 3;
   height: 58px;
   width: 100%;
-  // background: rgba(231, 231, 231, 0.13);
-  // backdrop-filter: blur(5px);
-  background-color: black;
+  background: rgba(231, 231, 231, 0.13);
+  backdrop-filter: blur(5px);
+  // background-color: colors.$primary-background;
   display: flex;
   align-items: center;
   justify-content: space-between;
