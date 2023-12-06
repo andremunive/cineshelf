@@ -1,0 +1,33 @@
+<div class="movies-container">
+  <div class="container-title-controller">
+    <h3>{{ moviesToShow.sectionTitle }}</h3>
+  </div>
+  <div class="container-main">
+    <button
+      (click)="leftScroll()"
+      role="button"
+      id="leftArrow"
+      class="left-arrow"
+    >
+      <i class="fa-solid fa-angle-left"></i>
+    </button>
+    <div #containerCarousel class="container-carousel">
+      <div class="carousel">
+        <div class="movie" *ngFor="let movie of moviesToShow.movies">
+          <a href="#"><img [src]="movie.poster" alt="" /></a>
+          <div class="movie-title-container">
+            <span class="movie-title">{{ movie.title }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button
+      (click)="rightScroll()"
+      role="button"
+      id="rightArrow"
+      class="right-arrow"
+    >
+      <i class="fa-solid fa-angle-right"></i>
+    </button>
+  </div>
+</div>

@@ -6,9 +6,15 @@ import { CarouselComponent } from './components/carousel/carousel.component';
 import { HomeComponent } from './container/home/home.component';
 
 import { JoinGenresPipe } from 'src/app/core/pipes/join-genres.pipe';
+import { MovieThumbnailComponent } from './components/movie-thumbnail/movie-thumbnail.component';
 
 @NgModule({
-  declarations: [CarouselComponent, HomeComponent, JoinGenresPipe],
+  declarations: [
+    CarouselComponent,
+    HomeComponent,
+    JoinGenresPipe,
+    MovieThumbnailComponent,
+  ],
   imports: [CommonModule, HomeRoutingModule],
 })
 export class HomeModule {}

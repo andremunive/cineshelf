@@ -5,7 +5,10 @@
   <div class="actions">
     <div class="filter">
       <mat-form-field class="select-filter">
-        <mat-select [formControl]="filterControl">
+        <mat-select
+          (selectionChange)="onSelectionChange($event)"
+          [formControl]="filterControl"
+        >
           <mat-option value="genre">By genre</mat-option>
           <mat-option value="name">By name</mat-option>
           <mat-option value="date">By date</mat-option>

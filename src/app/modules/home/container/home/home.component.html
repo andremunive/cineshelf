@@ -1,1 +1,7 @@
 <app-carousel [movies]="carouselMovies"></app-carousel>
+<div *ngIf="sliderMovies && sliderMovies.length > 0">
+  <app-movie-thumbnail
+    *ngFor="let movies of sliderMovies"
+    [moviesToShow]="movies"
+  ></app-movie-thumbnail>
+</div>
