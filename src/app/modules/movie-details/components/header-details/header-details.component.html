@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="title-container">
+    <h1>{{ title }}</h1>
+    <span>{{ duration }}</span>
+  </div>
+  <div class="media-container">
+    <div class="poster">
+      <img [src]="moviePoster ? moviePoster : notFoundPath" alt="" />
+    </div>
+    <div class="trailer">
+      <img [src]="movieBackDrop ? movieBackDrop : notFoundPath" alt="" />
+    </div>
+    <div class="actions">
+      <div
+        *ngIf="!onWatchList"
+        class="square watchlist"
+        (click)="addToWatchListAction()"
+      >
+        <i class="fa-solid fa-plus"></i>
+        <span>Add to watchlist</span>
+      </div>
+      <div
+        *ngIf="onWatchList"
+        class="square watchlist"
+        (click)="removeFromWatchListAction()"
+      >
+        <i class="fa-solid fa-check"></i>
+        <span>On my watchlist</span>
+      </div>
+      <div class="square">
+        <span class="rate">{{ score }}/10</span>
+        <span>Score</span>
+      </div>
+    </div>
+  </div>
+  <div class="genres-container">
+    <div *ngFor="let genre of genres" class="genre">{{ genre.name }}</div>
+  </div>
+</div>

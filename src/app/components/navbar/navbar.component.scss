@@ -1,7 +1,9 @@
 @use "../../../assets/build/scss/colors.scss" as colors;
 
 .container {
-  position: fixed;
+  &.fixed {
+    position: fixed;
+  }
   z-index: 3;
   height: 58px;
   width: 100%;
@@ -15,6 +17,7 @@
   .logo {
     width: 200px;
     margin-left: 130px;
+    cursor: pointer;
   }
   .actions {
     margin-right: 130px;

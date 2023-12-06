@@ -1,0 +1,53 @@
+<app-header-details
+  [title]="movieDetails.title"
+  [duration]="movieDetails.runtime + ' min'"
+  [moviePoster]="
+    movieDetails.poster_path
+      ? 'https://image.tmdb.org/t/p/w500' + movieDetails.poster_path
+      : null
+  "
+  [movieBackDrop]="
+    movieDetails.backdrop_path
+      ? 'https://image.tmdb.org/t/p/w500' + movieDetails.backdrop_path
+      : null
+  "
+  [genres]="movieDetails.genres"
+  [score]="movieDetails.vote_average.toString()"
+  [onWatchList]="onWatchList"
+  (addToWatchList)="addToWatchList()"
+  (removeFromWatchList)="removeFromWatchList()"
+></app-header-details>
+<div class="movie-info-container">
+  <p>
+    {{ movieDetails.overview }}
+  </p>
+  <hr *ngIf="movieDetails.production_companies.length > 0" />
+  <div *ngIf="movieDetails.production_companies.length > 0" class="info">
+    <span>Production company</span>
+    <span>{{ movieDetails.production_companies[0].name }}</span>
+  </div>
+  <hr *ngIf="movieDetails.spoken_languages.length > 0" />
+  <div *ngIf="movieDetails.spoken_languages.length > 0" class="info">
+    <span>Languajes</span>
+    <span>{{ movieDetails.spoken_languages[0].name }}</span>
+  </div>
+  <hr />
+  <div class="info">
+    <span>Release date</span>
+    <span>{{ movieDetails.release_date }}</span>
+  </div>
+</div>
+<div *ngIf="movieCast.length > 0" class="movie-cast-container">
+  <div class="title">
+    <h2>Main cast</h2>
+  </div>
+  <div class="cast-container">
+    <div *ngFor="let member of movieCast" class="main-cast">
+      <app-character
+        [profile]="'https://image.tmdb.org/t/p/w500' + member.profile_path"
+        [characterRealName]="member.name"
+        [characterName]="member.character ? member.character : ''"
+      ></app-character>
+    </div>
+  </div>
+</div>

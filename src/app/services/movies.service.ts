@@ -5,6 +5,8 @@ import { LocalMovieModel } from '../core/models/local-movie.interface';
 import { environment } from 'src/environments/environment';
 import { MoviesModel } from '../core/models/movies.interface';
 import { MoviesByDateModel } from '../core/models/movies-date.interface';
+import { MoviesIdModel } from '../core/models/movies-id.interface';
+import { CastModel } from '../core/models/cast.interface';
 
 interface dates {
   initialDate: string;
@@ -58,5 +60,15 @@ export class MoviesService {
     );
 
     return forkJoin(request);
+  }
+
+  getMovieById(id: string): Observable<MoviesIdModel> {
+    const url = `${environment.URL_BASE}movie/${id}?&append_to_response=videos&api_key=${environment.tmdbKey}`;
+    return this.http.get<MoviesIdModel>(url);
+  }
+
+  getCastMovie(id: string): Observable<CastModel> {
+    const url = `${environment.URL_BASE}movie/${id}/credits?api_key=${environment.tmdbKey}`;
+    return this.http.get<CastModel>(url);
   }
 }

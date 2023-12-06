@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { LocalMovieModel } from 'src/app/core/models/local-movie.interface';
 
 @Component({
@@ -12,6 +13,8 @@ export class CarouselComponent implements OnInit {
   @Input() autoSlide: boolean = true;
   @Input() slideInterval: number = 5000;
   selectedIndex = 0;
+
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     if (this.autoSlide) {
@@ -35,5 +38,9 @@ export class CarouselComponent implements OnInit {
 
   selectImage(index: number): void {
     this.selectedIndex = index;
+  }
+
+  goToDetails(id: string) {
+    this.router.navigate(['/movie/details', id]);
   }
 }

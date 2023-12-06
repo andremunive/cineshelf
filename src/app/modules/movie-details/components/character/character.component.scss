@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  margin-bottom: 32px;
+  .profile {
+    border-radius: 50%;
+    border: 2px solid white;
+    img {
+      object-fit: cover;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+    }
+  }
+  .character-info {
+    margin-left: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    h4 {
+      margin: 0 0 4px 0;
+    }
+  }
+}

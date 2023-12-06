@@ -3,6 +3,7 @@
     class="movie-card fade"
     [ngClass]="{ 'active-movie': selectedIndex === i }"
     *ngFor="let movie of movies; let i = index"
+    (click)="goToDetails(movie.id)"
   >
     <img class="background-image" [src]="movie.backdrop" alt="Background" />
     <div class="content">

@@ -13,8 +13,12 @@
     </button>
     <div #containerCarousel class="container-carousel">
       <div class="carousel">
-        <div class="movie" *ngFor="let movie of moviesToShow.movies">
-          <a href="#"><img [src]="movie.poster" alt="" /></a>
+        <div
+          class="movie"
+          *ngFor="let movie of moviesToShow.movies"
+          (click)="goToDetails(movie.id)"
+        >
+          <a><img [src]="movie.poster" alt="" /></a>
           <div class="movie-title-container">
             <span class="movie-title">{{ movie.title }}</span>
           </div>

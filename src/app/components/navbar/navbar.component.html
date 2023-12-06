@@ -1,9 +1,9 @@
-<div class="container">
-  <div class="logo">
+<div class="container" [ngClass]="{ fixed: isHome }">
+  <div class="logo" (click)="goHome()">
     <img src="../../../assets/build/images/svg/CINESHELF.svg" alt="" />
   </div>
   <div class="actions">
-    <div class="filter">
+    <div class="filter" *ngIf="isHome">
       <mat-form-field class="select-filter">
         <mat-select
           (selectionChange)="onSelectionChange($event)"

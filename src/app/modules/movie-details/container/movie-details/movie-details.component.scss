@@ -1,0 +1,32 @@
+.movie-info-container {
+  padding: 30px 132px;
+  color: white;
+  p {
+    opacity: 0.8;
+    margin-bottom: 30px;
+  }
+  .info {
+    opacity: 0.8;
+    display: flex;
+    span {
+      width: 15%;
+    }
+  }
+}
+
+.movie-cast-container {
+  padding: 0 132px;
+  color: white;
+  .title {
+    margin-bottom: 32px;
+    border-left: 5px solid #001585;
+    padding-left: 6px;
+    h2 {
+      opacity: 0.9;
+    }
+  }
+  .cast-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
