@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { MatSelectChange } from '@angular/material/select';
 import { NavigationEnd, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
+import { Subject, distinctUntilChanged, filter, takeUntil } from 'rxjs';
 import { filterBy } from 'src/app/state/actions/filter.action';
 import { AppState } from 'src/app/state/app.state';
 
@@ -13,43 +13,27 @@ import { AppState } from 'src/app/state/app.state';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit, OnDestroy {
-  subscriptions: Subscription[] = [];
+  private destroy$ = new Subject<void>();
   isHome: boolean = true;
   filterControl = new FormControl('genre');
 
   constructor(private store: Store<AppState>, private router: Router) {}
 
   ngOnInit(): void {
-    this.handleNavbarWithRoute();
-    this.startRoute();
+    this.router.events
+      .pipe(
+        filter((event) => event instanceof NavigationEnd),
+        distinctUntilChanged(),
+        takeUntil(this.destroy$)
+      )
+      .subscribe(() => this.updateIsHome());
+    this.updateIsHome();
   }
 
-  startRoute() {
-    if (
-      this.router.url.includes('details') ||
-      this.router.url.includes('watchlist')
-    ) {
-      this.isHome = false;
-      return;
-    }
-    this.isHome = true;
-  }
-
-  handleNavbarWithRoute() {
-    this.subscriptions.push(
-      this.router.events.subscribe((event) => {
-        if (event instanceof NavigationEnd) {
-          if (
-            event.url.includes('details') ||
-            event.url.includes('watchlist')
-          ) {
-            this.isHome = false;
-            return;
-          }
-          this.isHome = true;
-        }
-      })
-    );
+  updateIsHome() {
+    this.isHome =
+      !this.router.url.includes('details') &&
+      !this.router.url.includes('watchlist');
   }
 
   goHome() {
@@ -65,6 +49,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach((s) => s.unsubscribe());
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
