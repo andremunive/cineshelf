@@ -13,7 +13,7 @@ To be able to run this project you must:
 * Set TMDB key on environments variables (It will be available for one week to facilitate the review of the project)
 
 # Design
-A mockup of the project interface was designed in figma, below are some images and the link to the figma project
+A mockup of the project interface was designed in figma, below you can find the link to the figma project
 * [Cineshelf design project](https://www.figma.com/file/56aDTMcVvVVFeNyKNyhzEH/cineshelf?type=design&node-id=0%3A1&mode=design&t=NZSfc5QPyCSZQ65A-1)
 
 # Future improvements
