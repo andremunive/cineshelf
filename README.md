@@ -16,6 +16,10 @@ To be able to run this project you must:
 A mockup of the project interface was designed in figma, below you can find the link to the figma project
 * [Cineshelf design project](https://www.figma.com/file/56aDTMcVvVVFeNyKNyhzEH/cineshelf?type=design&node-id=0%3A1&mode=design&t=NZSfc5QPyCSZQ65A-1)
 
+# Deploy
+To deploy the project, Netlify was used.
+* Link: [cineshelf.com](https://master--frabjous-fudge-2b82a0.netlify.app/)
+
 # Future improvements
 * Mobile version
 * Filter by name
