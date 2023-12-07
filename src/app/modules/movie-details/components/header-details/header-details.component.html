@@ -7,8 +7,21 @@
     <div class="poster">
       <img [src]="moviePoster ? moviePoster : notFoundPath" alt="" />
     </div>
-    <div class="trailer">
+    <div class="trailer" (click)="showPlayer = true">
       <img [src]="movieBackDrop ? movieBackDrop : notFoundPath" alt="" />
+      <div class="play-trailer">
+        <i class="fa fa-play-circle"></i>
+        <span>Play trailer</span>
+      </div>
+    </div>
+    <div class="overlay" *ngIf="showPlayer" (click)="onOverlayClick($event)">
+      <div class="player-wrapper" (click)="onPlayerClick($event)">
+        <youtube-player
+          [videoId]="videoId"
+          [height]="400"
+          [width]="800"
+        ></youtube-player>
+      </div>
     </div>
     <div class="actions">
       <div

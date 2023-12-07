@@ -24,7 +24,10 @@ export class NavbarComponent implements OnInit {
   }
 
   startRoute() {
-    if (this.router.url.includes('details')) {
+    if (
+      this.router.url.includes('details') ||
+      this.router.url.includes('watchlist')
+    ) {
       this.isHome = false;
       return;
     }
@@ -34,7 +37,7 @@ export class NavbarComponent implements OnInit {
   handleNavbarWithRoute() {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        if (event.url.includes('details')) {
+        if (event.url.includes('details') || event.url.includes('watchlist')) {
           this.isHome = false;
           return;
         }
@@ -45,6 +48,10 @@ export class NavbarComponent implements OnInit {
 
   goHome() {
     this.router.navigate(['']);
+  }
+
+  goToWatchlist() {
+    this.router.navigate(['/watchlist']);
   }
 
   onSelectionChange(event: MatSelectChange) {

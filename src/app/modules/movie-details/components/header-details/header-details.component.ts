@@ -17,6 +17,8 @@ export class HeaderDetailsComponent implements OnInit {
   @Input() onWatchList: boolean = false;
   @Output() addToWatchList: EventEmitter<boolean> = new EventEmitter();
   @Output() removeFromWatchList: EventEmitter<boolean> = new EventEmitter();
+  @Input() videoId?: string = 'mkkgVEuEHKY';
+  showPlayer: boolean = false;
 
   ngOnInit(): void {}
 
@@ -25,5 +27,15 @@ export class HeaderDetailsComponent implements OnInit {
   }
   removeFromWatchListAction() {
     this.removeFromWatchList.emit();
+  }
+
+  onOverlayClick(event: MouseEvent): void {
+    this.showPlayer = false;
+  }
+
+  onPlayerClick(event: MouseEvent): void {
+    console.log('HERE2');
+    // Esto previene que el evento de clic se propague al contenedor
+    event.stopPropagation();
   }
 }

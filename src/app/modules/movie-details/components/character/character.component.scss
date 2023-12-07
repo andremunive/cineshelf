@@ -1,9 +1,10 @@
+@use "../../../../../assets/build/scss/colors.scss" as colors;
 .container {
   display: flex;
   margin-bottom: 32px;
   .profile {
     border-radius: 50%;
-    border: 2px solid white;
+    border: 2px solid colors.$white;
     img {
       object-fit: cover;
       width: 120px;

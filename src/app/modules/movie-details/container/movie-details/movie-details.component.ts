@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap, forkJoin, filter } from 'rxjs';
-import { Cast } from 'src/app/core/models/cast.interface';
+import { Cast, CastModel } from 'src/app/core/models/cast.interface';
 import { MoviesIdModel } from 'src/app/core/models/movies-id.interface';
 import { WatchListModel } from 'src/app/core/models/watch-list.interface';
 import { MoviesService } from 'src/app/services/movies.service';
@@ -17,6 +17,7 @@ export class MovieDetailsComponent implements OnInit {
   movieCast!: Cast[];
   movieId: string = '';
   onWatchList: boolean = false;
+  trailerId?: string = '';
   constructor(
     private route: ActivatedRoute,
     private moviesService: MoviesService,
@@ -25,6 +26,13 @@ export class MovieDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getMovieById();
+  }
+
+  getFirstTrailerKey(response: MoviesIdModel): string | undefined {
+    const trailers = response.videos.results.filter(
+      (video) => video.type === 'Trailer'
+    );
+    return trailers.length > 0 ? trailers[0].key : undefined;
   }
 
   addToWatchList() {
@@ -64,6 +72,7 @@ export class MovieDetailsComponent implements OnInit {
               member.known_for_department === 'Acting' &&
               member.profile_path !== null
           );
+          this.trailerId = this.getFirstTrailerKey(data.movieDetails);
         },
         (error) => {
           console.error(error);

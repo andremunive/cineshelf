@@ -1,6 +1,8 @@
+@use "../../../../../assets/build/scss/colors.scss" as colors;
+
 .movie-info-container {
   padding: 30px 132px;
-  color: white;
+  color: colors.$white;
   p {
     opacity: 0.8;
     margin-bottom: 30px;
@@ -16,10 +18,10 @@
 
 .movie-cast-container {
   padding: 0 132px;
-  color: white;
+  color: colors.$white;
   .title {
     margin-bottom: 32px;
-    border-left: 5px solid #001585;
+    border-left: 5px solid colors.$blue;
     padding-left: 6px;
     h2 {
       opacity: 0.9;

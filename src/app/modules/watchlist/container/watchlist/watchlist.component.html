@@ -1,1 +1,15 @@
-<p>watchlist works!</p>
+<div class="container">
+  <h1 *ngIf="watchListMovies.length < 1">Your watchlist is currently empty.</h1>
+  <h1 *ngIf="watchListMovies.length > 0">My watchlist</h1>
+  <div class="movies-grid">
+    <div *ngFor="let movie of watchListMovies" class="movie-card">
+      <button class="remove-btn" (click)="removeFromWatchList(movie.id)">
+        X
+      </button>
+      <img [src]="movie.posterPath" />
+      <div class="movie-title">
+        <h5>{{ movie.title }}</h5>
+      </div>
+    </div>
+  </div>
+</div>

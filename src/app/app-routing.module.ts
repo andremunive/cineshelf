@@ -19,6 +19,13 @@ const routes: Routes = [
             (m) => m.MovieDetailsModule
           ),
       },
+      {
+        path: 'watchlist',
+        loadChildren: () =>
+          import('./modules/watchlist/watchlist.module').then(
+            (m) => m.WatchlistModule
+          ),
+      },
     ],
   },
 ];

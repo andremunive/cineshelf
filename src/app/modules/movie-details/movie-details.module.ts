@@ -5,17 +5,14 @@ import { MovieDetailsRoutingModule } from './movie-details-routing.module';
 import { MovieDetailsComponent } from './container/movie-details/movie-details.component';
 import { HeaderDetailsComponent } from './components/header-details/header-details.component';
 import { CharacterComponent } from './components/character/character.component';
-
+import { YouTubePlayerModule } from '@angular/youtube-player';
 
 @NgModule({
   declarations: [
     MovieDetailsComponent,
     HeaderDetailsComponent,
-    CharacterComponent
+    CharacterComponent,
   ],
-  imports: [
-    CommonModule,
-    MovieDetailsRoutingModule
-  ]
+  imports: [CommonModule, MovieDetailsRoutingModule, YouTubePlayerModule],
 })
-export class MovieDetailsModule { }
+export class MovieDetailsModule {}

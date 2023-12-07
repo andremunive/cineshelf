@@ -1,3 +1,5 @@
+@use "../../../../../assets/build/scss/colors.scss" as colors;
+
 .carousel-container {
   cursor: pointer;
   position: relative;
@@ -42,7 +44,7 @@
         }
 
         .movie-info {
-          color: white;
+          color: colors.$white;
           max-width: calc(100% - 200px);
           display: flex;
           flex-direction: column;
@@ -92,7 +94,7 @@
       height: 13px;
       width: 13px;
       margin: 0 5px;
-      background-color: #fff;
+      background-color: colors.$white;
       border-radius: 50%;
       display: inline-block;
       transition: opacity 0, 6s ease;

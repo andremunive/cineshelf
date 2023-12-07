@@ -29,7 +29,7 @@
         height: 38px !important;
         width: 176px !important;
         ::ng-deep .mat-mdc-text-field-wrapper {
-          background-color: #484848;
+          background-color: colors.$gray-07;
           border-radius: 0;
           display: flex;
           align-items: center;
@@ -51,8 +51,9 @@
       margin: 0 14px;
     }
     a {
+      cursor: pointer;
       text-decoration: none;
-      color: #fff;
+      color: colors.$white;
       font-size: 24px;
       font-weight: 700;
     }
@@ -60,16 +61,16 @@
 }
 ::ng-deep .mat-primary.mdc-menu-surface {
   box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2);
-  background-color: #484848;
+  background-color: colors.$gray-07;
 }
 
 ::ng-deep .mdc-list-item__primary-text {
-  color: #bebebe;
+  color: colors.$gray-02;
 }
 
 ::ng-deep
   .mat-primary
   .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled)
   .mdc-list-item__primary-text {
-  color: #fff;
+  color: colors.$white;
 }
