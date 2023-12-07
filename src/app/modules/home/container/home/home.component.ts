@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, forkJoin } from 'rxjs';
+import { Observable, Subscription, forkJoin } from 'rxjs';
 import { FilterEnum } from 'src/app/core/enums/filter.enum';
 import { CarouselModel, Movies } from 'src/app/core/models/carousel.interface';
 import { LocalMovieModel } from 'src/app/core/models/local-movie.interface';
@@ -18,7 +18,8 @@ import { selectFilterOption } from 'src/app/state/selectors/filter.selector';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
+  subscriptions: Subscription[] = [];
   filter$: Observable<any> = new Observable();
   filter: any;
   carouselMovies: LocalMovieModel[] = [];
@@ -95,24 +96,32 @@ export class HomeComponent implements OnInit {
   getMovies(filter: string) {
     switch (filter) {
       case FilterEnum.genre:
-        forkJoin({
-          localMovies: this.moviesService.getLocalMovies(),
-          movies: this.moviesService.getMovieByGenres(),
-        }).subscribe(({ localMovies, movies }) => {
-          this.carouselMovies = localMovies;
-          this.createSliderMovies(movies);
-        });
+        this.subscriptions.push(
+          forkJoin({
+            localMovies: this.moviesService.getLocalMovies(),
+            movies: this.moviesService.getMovieByGenres(),
+          }).subscribe(({ localMovies, movies }) => {
+            this.carouselMovies = localMovies;
+            this.createSliderMovies(movies);
+          })
+        );
         break;
       case FilterEnum.date:
-        forkJoin({
-          localMovies: this.moviesService.getLocalMovies(),
-          movies: this.moviesService.getMoviesByYear(),
-        }).subscribe(({ localMovies, movies }) => {
-          console.log('MOVIES => ', movies);
-          this.carouselMovies = localMovies;
-          this.createSliderMoviesByDate(movies);
-        });
+        this.subscriptions.push(
+          forkJoin({
+            localMovies: this.moviesService.getLocalMovies(),
+            movies: this.moviesService.getMoviesByYear(),
+          }).subscribe(({ localMovies, movies }) => {
+            console.log('MOVIES => ', movies);
+            this.carouselMovies = localMovies;
+            this.createSliderMoviesByDate(movies);
+          })
+        );
         break;
     }
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((s) => s.unsubscribe());
   }
 }

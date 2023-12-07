@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { switchMap, forkJoin, filter } from 'rxjs';
-import { Cast, CastModel } from 'src/app/core/models/cast.interface';
+import { switchMap, forkJoin, Subscription } from 'rxjs';
+import { Cast } from 'src/app/core/models/cast.interface';
 import { MoviesIdModel } from 'src/app/core/models/movies-id.interface';
 import { WatchListModel } from 'src/app/core/models/watch-list.interface';
 import { MoviesService } from 'src/app/services/movies.service';
@@ -12,12 +12,13 @@ import { StorageService } from 'src/app/services/storage.service';
   templateUrl: './movie-details.component.html',
   styleUrls: ['./movie-details.component.scss'],
 })
-export class MovieDetailsComponent implements OnInit {
+export class MovieDetailsComponent implements OnInit, OnDestroy {
   movieDetails!: MoviesIdModel;
   movieCast!: Cast[];
   movieId: string = '';
   onWatchList: boolean = false;
   trailerId?: string = '';
+  subscriptions: Subscription[] = [];
   constructor(
     private route: ActivatedRoute,
     private moviesService: MoviesService,
@@ -52,31 +53,36 @@ export class MovieDetailsComponent implements OnInit {
   }
 
   getMovieById() {
-    this.route.params
-      .pipe(
-        switchMap((params) => {
-          const id = params['id'];
-          this.movieId = id;
-          this.onWatchList = this.storageService.existsInWatchList(id);
-          return forkJoin({
-            movieDetails: this.moviesService.getMovieById(id),
-            movieCast: this.moviesService.getCastMovie(id),
-          });
-        })
-      )
-      .subscribe(
-        (data) => {
-          this.movieDetails = data.movieDetails;
-          this.movieCast = data.movieCast.cast.filter(
-            (member) =>
-              member.known_for_department === 'Acting' &&
-              member.profile_path !== null
-          );
-          this.trailerId = this.getFirstTrailerKey(data.movieDetails);
-        },
-        (error) => {
-          console.error(error);
-        }
-      );
+    this.subscriptions.push(
+      this.route.params
+        .pipe(
+          switchMap((params) => {
+            const id = params['id'];
+            this.movieId = id;
+            this.onWatchList = this.storageService.existsInWatchList(id);
+            return forkJoin({
+              movieDetails: this.moviesService.getMovieById(id),
+              movieCast: this.moviesService.getCastMovie(id),
+            });
+          })
+        )
+        .subscribe(
+          (data) => {
+            this.movieDetails = data.movieDetails;
+            this.movieCast = data.movieCast.cast.filter(
+              (member) =>
+                member.known_for_department === 'Acting' &&
+                member.profile_path !== null
+            );
+            this.trailerId = this.getFirstTrailerKey(data.movieDetails);
+          },
+          (error) => {
+            console.error(error);
+          }
+        )
+    );
+  }
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((s) => s.unsubscribe());
   }
 }
